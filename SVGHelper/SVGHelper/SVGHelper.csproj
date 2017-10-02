@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1495B221-3627-4975-9BD1-6FE9D1B39175}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>SVGHelper</RootNamespace>
+    <AssemblyName>SVGHelper</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Analyze\StringStream.cs" />
+    <Compile Include="Analyze\SvgFileReader.cs" />
+    <Compile Include="Analyze\SvgParserEngine.cs" />
+    <Compile Include="Common\StringStream.cs" />
+    <Compile Include="Engine\NamespaceCleaner.cs" />
+    <Compile Include="Model\Svg\BDTCSSAttributeAngle.cs" />
+    <Compile Include="Model\Svg\BDTSvgAttributeAngle.cs" />
+    <Compile Include="Model\Svg\BDTSvgAttributeAnything.cs" />
+    <Compile Include="Model\Svg\BDTSvgAttributeColor.cs" />
+    <Compile Include="Model\Svg\BDTSvgAttributeCoordinate.cs" />
+    <Compile Include="Model\Svg\EBDTAngleUnit.cs" />
+    <Compile Include="Model\Svg\EBDTSvgAttributeColor.cs" />
+    <Compile Include="Model\Svg\EBDTSvgAttributeCoordinateUnit.cs" />
+    <Compile Include="Model\Svg\ESvgParserState.cs" />
+    <Compile Include="Model\Svg\ESvgTagType.cs" />
+    <Compile Include="Model\Svg\SvgImage.cs" />
+    <Compile Include="Model\Svg\SvgShape.cs" />
+    <Compile Include="Model\Svg\XmlElementBase.cs" />
+    <Compile Include="Model\Svg\XmlProlog.cs" />
+    <Compile Include="Parser\CString.cs" />
+    <Compile Include="Parser\FixedFloatArray10.cs" />
+    <Compile Include="Parser\FixedFloatArray2.cs" />
+    <Compile Include="Parser\SvgXmlParser.cs" />
+    <Compile Include="Engine\PathManipulator.cs" />
+    <Compile Include="Parser\SvgPathElement.cs" />
+    <Compile Include="Parser\Xf.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Engine\SvgEngine.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
