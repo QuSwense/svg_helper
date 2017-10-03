@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SVGHelper.Model.Svgv11
+namespace SVGHelper.Model.CSS
 {
     /// <summary>
     /// The CSSRule interface is the abstract base interface for any type of CSS statement.

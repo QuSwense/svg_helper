@@ -12,6 +12,6 @@ namespace SVGHelper.Model.Svgv11
     /// </summary>
     public interface SVGCSSRule : CSSRule
     {
-        const ushort COLOR_PROFILE_RULE = 7;
+        
     }
 }

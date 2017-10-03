@@ -1,10 +1,12 @@
 ﻿using SVGHelper.Model.Svg;
+using SVGHelper.Model.Svgv11;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace SVGHelper.Analyze
 {
@@ -17,12 +19,12 @@ namespace SVGHelper.Analyze
         /// <summary>
         /// The whole Svg file content in this object
         /// </summary>
-        public SvgImage Image { get; set; }
+        public SVGSVGElementImpl SvgRoot { get; set; }
 
         /// <summary>
         /// The svg file reader
         /// </summary>
-        private SvgFileReader svgFile;
+        private XDocument svgFile;
 
         /// <summary>
         /// Constructor to initialize the Parser engine object
@@ -30,13 +32,10 @@ namespace SVGHelper.Analyze
         /// <param name="fullFilePath"></param>
         public SvgParserEngine(string fullFilePath)
         {
-            svgFile = new SvgFileReader(fullFilePath);
+            svgFile = new XDocument(fullFilePath);
 
             if (svgFile == null)
                 throw new Exception("Svg File not found");
-
-            if (svgFile.Length <= 0)
-                throw new Exception("Svg file is of Zero size");
         }
 
         /// <summary>
@@ -53,7 +52,7 @@ namespace SVGHelper.Analyze
         /// </summary>
         private void Initialize()
         {
-            Image = new SvgImage();
+            SvgRoot = new SVGSVGElementImpl();
         }
 
         /// <summary>
@@ -61,31 +60,19 @@ namespace SVGHelper.Analyze
         /// </summary>
         private void ParseXml()
         {
-            ESvgParserState state = ESvgParserState.NSVG_XML_CONTENT;
-            StringStream content = new StringStream();
-
-            while(!svgFile.IsEof)
+            foreach (XElement element in svgFile.Elements())
             {
-                if(svgFile.CurrentChar == '<' && state == ESvgParserState.NSVG_XML_CONTENT)
-                {
-                    // Start of a tag
-                    ParseContent(content);
-                    content.Clear();
-                    state = ESvgParserState.NSVG_XML_TAG;
-                }
-                else if(svgFile.CurrentChar == '>' && state == ESvgParserState.NSVG_XML_TAG)
-                {
-                    ParseElement(content);
-                    content.Clear();
-                    state = ESvgParserState.NSVG_XML_CONTENT;
-                }
-                else
-                {
-                    content.Append(svgFile.CurrentChar);
-                }
-
-                svgFile.SeekNext();
+                SwitchElementFactory(element, SvgRoot);
             }
+        }
+
+        /// <summary>
+        /// This method creates a element node
+        /// </summary>
+        /// <param name="element"></param>
+        private void SwitchElementFactory(XElement element, SVGElement svgElement)
+        {
+            
         }
 
         /// <summary>
@@ -94,30 +81,7 @@ namespace SVGHelper.Analyze
         /// <param name="content"></param>
         private void ParseElement(StringStream content)
         {
-            // Temporary storage for attributes after parsing
-            List<string> attributes = new List<string>();
-            ESvgTagType tagType = ESvgTagType.NONE;
-
-            // Skip white space after the '<'
-            content.SkipWhitespaces();
-
-            // Check if the tag is end tag
-            if(content.CurrentChar == '/')
-            {
-                tagType = ESvgTagType.END;
-                svgFile.SeekNext();
-            }
-            else
-            {
-                tagType = ESvgTagType.START;
-            }
-
-            // Skip comments, data and preprocessor stuff.
-            if (content.CurrentChar == '?')
-            {
-                ParseXMLProlog(content);
-            }
-            else if(content.CurrentChar == '!') return;
+            
         }
 
         /// <summary>

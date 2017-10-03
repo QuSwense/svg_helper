@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SVGHelper.Model.Svgv11
+namespace SVGHelper.Model.CSS
 {
     /// <summary>
     /// The CSSStyleSheet interface is a concrete interface used to represent a 

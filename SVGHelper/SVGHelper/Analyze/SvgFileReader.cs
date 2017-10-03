@@ -15,7 +15,7 @@ namespace SVGHelper.Analyze
         /// <summary>
         /// We use an inherent stream reader
         /// </summary>
-        private StreamReader svgFile;
+        private XDocu svgFile;
 
         /// <summary>
         /// Constructor to initialize the reader with svg file path
